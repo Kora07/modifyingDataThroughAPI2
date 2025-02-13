@@ -53,7 +53,6 @@ menuRouter.put("/menu/:id", async (request, response) => {
     const { id } = request.params;
     const { name, description, price } = request.body;
 
-    // Validate required fields
     if (!name && !price) {
         return response.status(400).json({
             message: "At least one of name or price is required to update.",
@@ -64,7 +63,6 @@ menuRouter.put("/menu/:id", async (request, response) => {
         const updatedItem = await menuModel.findByIdAndUpdate(
             id,
             { name, description, price },
-            { new: true, runValidators: true } // Return the updated document and run validators
         );
 
         if (!updatedItem) {
@@ -86,7 +84,6 @@ menuRouter.put("/menu/:id", async (request, response) => {
     }
 });
 
-// Delete an existing menu item
 menuRouter.delete("/menu/:id", async (request, response) => {
     const { id } = request.params;
 
